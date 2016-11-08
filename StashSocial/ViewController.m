@@ -70,7 +70,7 @@ typedef enum {
     
     [self setNeedsStatusBarAppearanceUpdate];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openPlaceIdOnMap:) name:@"openPlaceId" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openPlaceIdOnMap:) name:@"openPlaceId" object:nil]; // TODO remove it when necessary
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
