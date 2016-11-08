@@ -69,6 +69,8 @@ typedef enum {
     [self.mapView addObserver:self forKeyPath:@"myLocation" options:0 context:nil];
     
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openPlaceIdOnMap:) name:@"openPlaceId" object:nil];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -95,14 +97,6 @@ typedef enum {
     }
 }
 
--(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:self.locationManager.location.coordinate.longitude
-                                                            longitude:self.locationManager.location.coordinate.longitude
-                                                                 zoom:6];
-    
-    [self.mapView setCamera: camera];
-}
-
 - (void)loadMapView {
     
     self.mapView.delegate = self;
@@ -114,6 +108,28 @@ typedef enum {
     [self.mapView setCamera: camera];
     self.mapView.myLocationEnabled = YES;
     [self.mapView.settings setMyLocationButton:YES];
+}
+
+- (void) openPlaceIdOnMap: (NSNotification *) notification{
+    
+    [[GMSPlacesClient sharedClient] lookUpPlaceID:[notification.userInfo valueForKey:@"placeId"] callback:^(GMSPlace * _Nullable result, NSError * _Nullable error) {
+        if(error == nil){
+            // Do something with the selected place.
+            GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude: result.coordinate.latitude
+                                                                    longitude: result.coordinate.longitude
+                                                                         zoom:6];
+            
+            [self.mapView setCamera: camera];
+            
+            GMSMarker *marker = [[GMSMarker alloc] init];
+            marker.position = CLLocationCoordinate2DMake(result.coordinate.latitude, result.coordinate.longitude);
+            marker.title = result.name;
+            marker.snippet = @"Tap to share";
+            marker.map = self.mapView;
+            [self.mapView setSelectedMarker:marker];
+            _selectedPlace = result;
+        }
+    }];
 }
 
 #pragma mark - Text Field Delegate Methods
@@ -243,8 +259,8 @@ typedef enum {
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:@"Others" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         selectedShareOption = OTHERS;
-        NSString *place = [NSString stringWithFormat:@"%@, %@", self.selectedPlace.name, self.selectedPlace.formattedAddress];
-        UIActivityViewController *atvc = [[UIActivityViewController alloc] initWithActivityItems:@[place] applicationActivities:nil];
+        NSString *shareText = [self createMessageText];
+        UIActivityViewController *atvc = [[UIActivityViewController alloc] initWithActivityItems:@[shareText] applicationActivities:nil];
         atvc.excludedActivityTypes = @[UIActivityTypeMail, UIActivityTypeMessage, UIActivityTypePrint];
         [self presentViewController:atvc animated:YES completion:nil];
     }]];
@@ -305,13 +321,19 @@ typedef enum {
 
 #pragma mark - Email and Mail Methods
 
+- (NSString *) createMessageText{
+    NSString *link = [NSString stringWithFormat:@"stashsocial://?placeId=%@",self.selectedPlace.placeID];
+    NSString *text = [NSString stringWithFormat:@"%@, %@\n%@", self.selectedPlace.name, self.selectedPlace.formattedAddress, link];
+    return text;
+}
+
 - (void) sendEmailWithEmail:(NSString *) email {
     MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
     mailComposeViewController.mailComposeDelegate = self;
     [mailComposeViewController setToRecipients:@[email]];
     [mailComposeViewController setSubject: self.selectedPlace.name];
-    NSString *place = [NSString stringWithFormat:@"%@, %@", self.selectedPlace.name, self.selectedPlace.formattedAddress];
-    [mailComposeViewController setMessageBody:place
+    
+    [mailComposeViewController setMessageBody:[self createMessageText]
                                        isHTML:NO];
     [self.navigationController presentViewController:mailComposeViewController animated:YES completion:nil];
 }
@@ -320,16 +342,8 @@ typedef enum {
 -(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
     
     if(result == MFMailComposeResultSent){
-        StashRecord *record = [NSEntityDescription insertNewObjectForEntityForName:@"StashRecord" inManagedObjectContext:[self getLocalContext]];
-        record.recordId = [NSDate timeIntervalSinceReferenceDate]; // TODO: Generate More Unique ID
-        record.recipientEmail = self.selectedContact.emailAddresses[0].value;
-        record.placeId = self.selectedPlace.placeID;
-        record.placeName = self.selectedPlace.name;
-        record.placeAddress = self.selectedPlace.formattedAddress;
-        record.recipientName = self.selectedContact.givenName;
-        
-        if(![self saveContext]){
-            NSLog(@"Failure Handle this");
+        if(![self saveRecord]){
+            NSLog(@"Error saving record"); // TODO Alert
         }
     }
     [controller dismissViewControllerAnimated:YES completion:nil];
@@ -339,27 +353,34 @@ typedef enum {
     MFMessageComposeViewController *messageComposeViewController = [[MFMessageComposeViewController alloc] init];
     messageComposeViewController.messageComposeDelegate = self;
     messageComposeViewController.recipients = @[phoneNumber];
-    NSString *place = [NSString stringWithFormat:@"%@, %@", self.selectedPlace.name, self.selectedPlace.formattedAddress];
-    messageComposeViewController.body = place;
+    messageComposeViewController.body = [self createMessageText];
     [self.navigationController presentViewController:messageComposeViewController animated:YES completion:nil];
 }
 
 -(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
     
     if(result == MessageComposeResultSent){
-        StashRecord *record = [NSEntityDescription insertNewObjectForEntityForName:@"StashRecord" inManagedObjectContext:[self getLocalContext]];
-        record.recordId = [NSDate timeIntervalSinceReferenceDate]; // TODO: Generate More Unique ID
-        record.recipientPhoneNumber = [((CNPhoneNumber *)self.selectedContact.phoneNumbers[0].value) valueForKey:@"digits"];
-        record.placeId = self.selectedPlace.placeID;
-        record.placeName = self.selectedPlace.name;
-        record.placeAddress = self.selectedPlace.formattedAddress;
-        record.recipientName = self.selectedContact.givenName;
-
-        if(![self saveContext]){
-            NSLog(@"Failure Handle this");
+        if(![self saveRecord]){
+            NSLog(@"Error saving record"); // TODO Alert
         }
     }
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL) saveRecord{
+    StashRecord *record = [NSEntityDescription insertNewObjectForEntityForName:@"StashRecord" inManagedObjectContext:[self getLocalContext]];
+    record.recordId = [NSDate timeIntervalSinceReferenceDate]; // TODO: Generate More Unique ID
+    record.recipientPhoneNumber = [((CNPhoneNumber *)self.selectedContact.phoneNumbers[0].value) valueForKey:@"digits"];
+    record.placeId = self.selectedPlace.placeID;
+    record.placeName = self.selectedPlace.name;
+    record.placeAddress = self.selectedPlace.formattedAddress;
+    record.recipientName = self.selectedContact.givenName;
+    
+    if(![self saveContext]){
+        NSLog(@"Failure Handle this");
+        return false;
+    }
+    return true;
 }
 
 #pragma mark - Navigation
