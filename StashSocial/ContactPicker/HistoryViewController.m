@@ -55,6 +55,15 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    StashRecord *record = [self.recordsArray objectAtIndex:indexPath.row];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"openPlaceId" object:nil userInfo:@{@"placeId": record.placeId}];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(NSManagedObjectContext *) getLocalContext{
     if(_localContext != nil){
         return _localContext;

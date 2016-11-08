@@ -89,7 +89,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" textLabel="bSw-Sv-e89" detailTextLabel="9p8-jg-1Ot" style="IBUITableViewCellStyleSubtitle" id="0uy-Yq-8Ds">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="bSw-Sv-e89" detailTextLabel="9p8-jg-1Ot" style="IBUITableViewCellStyleSubtitle" id="0uy-Yq-8Ds">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0uy-Yq-8Ds" id="BJo-P5-XvM">
@@ -138,7 +138,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Nh-Vy-O7l" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="J6j-1c-5tA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J6j-1c-5tA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.20265525579999999" green="0.59116286039999999" blue="0.85301119089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
