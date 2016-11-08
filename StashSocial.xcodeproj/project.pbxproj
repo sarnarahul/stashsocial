@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1662F4B81DD0255800BCF336 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1662F4B71DD0255800BCF336 /* CoreLocation.framework */; };
+		1662F4E71DD169EC00BCF336 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1662F4E61DD169EC00BCF336 /* HistoryViewController.m */; };
+		1662F4FA1DD1AA3200BCF336 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1662F4F91DD1AA3200BCF336 /* CoreDataHelper.m */; };
 		16812BC81DCC167B005F1AA3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812BC71DCC167B005F1AA3 /* main.m */; };
 		16812BCB1DCC167B005F1AA3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812BCA1DCC167B005F1AA3 /* AppDelegate.m */; };
 		16812BCE1DCC167B005F1AA3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16812BCD1DCC167B005F1AA3 /* ViewController.m */; };
@@ -14,9 +17,15 @@
 		16812BD41DCC167B005F1AA3 /* StashSocial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16812BD21DCC167B005F1AA3 /* StashSocial.xcdatamodeld */; };
 		16812BD61DCC167B005F1AA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16812BD51DCC167B005F1AA3 /* Assets.xcassets */; };
 		16812BD91DCC167B005F1AA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16812BD71DCC167B005F1AA3 /* LaunchScreen.storyboard */; };
+		F73D361380570A88BE990B9D /* Pods_StashSocial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B4B8D090024D7BF29F65155 /* Pods_StashSocial.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1662F4B71DD0255800BCF336 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1662F4E51DD169EC00BCF336 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HistoryViewController.h; path = ContactPicker/HistoryViewController.h; sourceTree = "<group>"; };
+		1662F4E61DD169EC00BCF336 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HistoryViewController.m; path = ContactPicker/HistoryViewController.m; sourceTree = "<group>"; };
+		1662F4F81DD1AA3200BCF336 /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		1662F4F91DD1AA3200BCF336 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		16812BC31DCC167B005F1AA3 /* StashSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StashSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16812BC71DCC167B005F1AA3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16812BC91DCC167B005F1AA3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -28,6 +37,9 @@
 		16812BD51DCC167B005F1AA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16812BD81DCC167B005F1AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16812BDA1DCC167B005F1AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18D5CB2428E3C9EFE93847D2 /* Pods-StashSocial.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StashSocial.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StashSocial/Pods-StashSocial.debug.xcconfig"; sourceTree = "<group>"; };
+		4B4B8D090024D7BF29F65155 /* Pods_StashSocial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StashSocial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE2218E28E54C3EBE95E37FE /* Pods-StashSocial.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StashSocial.release.xcconfig"; path = "Pods/Target Support Files/Pods-StashSocial/Pods-StashSocial.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +47,74 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1662F4B81DD0255800BCF336 /* CoreLocation.framework in Frameworks */,
+				F73D361380570A88BE990B9D /* Pods_StashSocial.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10A674986E7B1E7E2B1E9345 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				18D5CB2428E3C9EFE93847D2 /* Pods-StashSocial.debug.xcconfig */,
+				BE2218E28E54C3EBE95E37FE /* Pods-StashSocial.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1662F4E81DD169F600BCF336 /* ContactPicker */ = {
+			isa = PBXGroup;
+			children = (
+				1662F4E51DD169EC00BCF336 /* HistoryViewController.h */,
+				1662F4E61DD169EC00BCF336 /* HistoryViewController.m */,
+			);
+			name = ContactPicker;
+			sourceTree = "<group>";
+		};
+		1662F4E91DD16A0B00BCF336 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				16812BD21DCC167B005F1AA3 /* StashSocial.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1662F4EA1DD16A1800BCF336 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				16812BCC1DCC167B005F1AA3 /* ViewController.h */,
+				16812BCD1DCC167B005F1AA3 /* ViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		1662F4EB1DD16A3000BCF336 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				16812BCF1DCC167B005F1AA3 /* Main.storyboard */,
+				16812BD71DCC167B005F1AA3 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		1662F4FB1DD1AA4A00BCF336 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1662F4F81DD1AA3200BCF336 /* CoreDataHelper.h */,
+				1662F4F91DD1AA3200BCF336 /* CoreDataHelper.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		16812BBA1DCC167B005F1AA3 = {
 			isa = PBXGroup;
 			children = (
 				16812BC51DCC167B005F1AA3 /* StashSocial */,
 				16812BC41DCC167B005F1AA3 /* Products */,
+				10A674986E7B1E7E2B1E9345 /* Pods */,
+				23AAFB4F1E23F2D310A51F74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,15 +129,15 @@
 		16812BC51DCC167B005F1AA3 /* StashSocial */ = {
 			isa = PBXGroup;
 			children = (
+				1662F4FB1DD1AA4A00BCF336 /* Utility */,
+				16812BD51DCC167B005F1AA3 /* Assets.xcassets */,
+				1662F4EB1DD16A3000BCF336 /* View */,
+				1662F4E91DD16A0B00BCF336 /* Model */,
+				1662F4E81DD169F600BCF336 /* ContactPicker */,
 				16812BC91DCC167B005F1AA3 /* AppDelegate.h */,
 				16812BCA1DCC167B005F1AA3 /* AppDelegate.m */,
-				16812BCC1DCC167B005F1AA3 /* ViewController.h */,
-				16812BCD1DCC167B005F1AA3 /* ViewController.m */,
-				16812BCF1DCC167B005F1AA3 /* Main.storyboard */,
-				16812BD51DCC167B005F1AA3 /* Assets.xcassets */,
-				16812BD71DCC167B005F1AA3 /* LaunchScreen.storyboard */,
+				1662F4EA1DD16A1800BCF336 /* Controller */,
 				16812BDA1DCC167B005F1AA3 /* Info.plist */,
-				16812BD21DCC167B005F1AA3 /* StashSocial.xcdatamodeld */,
 				16812BC61DCC167B005F1AA3 /* Supporting Files */,
 			);
 			path = StashSocial;
@@ -82,6 +151,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		23AAFB4F1E23F2D310A51F74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1662F4B71DD0255800BCF336 /* CoreLocation.framework */,
+				4B4B8D090024D7BF29F65155 /* Pods_StashSocial.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,9 +167,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 16812BDD1DCC167B005F1AA3 /* Build configuration list for PBXNativeTarget "StashSocial" */;
 			buildPhases = (
+				BDF69E5A30E5F86AA7E0D77F /* [CP] Check Pods Manifest.lock */,
 				16812BBF1DCC167B005F1AA3 /* Sources */,
 				16812BC01DCC167B005F1AA3 /* Frameworks */,
 				16812BC11DCC167B005F1AA3 /* Resources */,
+				10584013934FA0AD0E50632B /* [CP] Embed Pods Frameworks */,
+				0B7AFBFE691323E0C9EDBD91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,6 +230,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0B7AFBFE691323E0C9EDBD91 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StashSocial/Pods-StashSocial-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		10584013934FA0AD0E50632B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StashSocial/Pods-StashSocial-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BDF69E5A30E5F86AA7E0D77F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		16812BBF1DCC167B005F1AA3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -158,6 +287,8 @@
 				16812BCB1DCC167B005F1AA3 /* AppDelegate.m in Sources */,
 				16812BD41DCC167B005F1AA3 /* StashSocial.xcdatamodeld in Sources */,
 				16812BC81DCC167B005F1AA3 /* main.m in Sources */,
+				1662F4FA1DD1AA3200BCF336 /* CoreDataHelper.m in Sources */,
+				1662F4E71DD169EC00BCF336 /* HistoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,10 +406,12 @@
 		};
 		16812BDE1DCC167B005F1AA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18D5CB2428E3C9EFE93847D2 /* Pods-StashSocial.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TN6HL26EU6;
 				INFOPLIST_FILE = StashSocial/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.autokrat.StashSocial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -287,10 +420,12 @@
 		};
 		16812BDF1DCC167B005F1AA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE2218E28E54C3EBE95E37FE /* Pods-StashSocial.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = TN6HL26EU6;
 				INFOPLIST_FILE = StashSocial/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.autokrat.StashSocial;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -316,6 +451,7 @@
 				16812BDF1DCC167B005F1AA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

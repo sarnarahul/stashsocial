@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+@import GoogleMaps;
+@import GooglePlaces;
 
 @interface AppDelegate ()
 
@@ -17,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [GMSServices provideAPIKey:@"AIzaSyBU2SB6o1jachh9vlYq35Tr6q6emYqsC0E"];
+    [GMSPlacesClient provideAPIKey:@"AIzaSyBM5A2Ws-SRzp3kTuYHVbGjXe9woCQD4rc"];
+    
     return YES;
 }
 
@@ -24,12 +30,14 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    [self saveContext];
 }
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self saveContext];
 }
 
 
@@ -92,6 +100,56 @@
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
         abort();
+    }
+}
+
+#pragma mark - Helper methods
+
++(AppDelegate *) getAppDelegate{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (void) showAlertWithMessage: (NSString *) message {
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Stash Invest" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertController addAction:dismissAction];
+    
+    [_window.rootViewController presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void) requestForContactsAccessWithCompletionHandler: (void (^)(BOOL granted))completionHandler{
+    
+    CNAuthorizationStatus status = [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    
+    switch (status) {
+        case CNAuthorizationStatusAuthorized:
+            completionHandler(YES);
+            break;
+        case CNAuthorizationStatusDenied:
+        case CNAuthorizationStatusNotDetermined:
+        {
+            [self.contanctStore requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                if(granted){
+                    completionHandler(granted);
+                }
+                else{
+                    if(status == CNAuthorizationStatusDenied) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            NSString *message = [NSString stringWithFormat:@"%@,\n Please allow the app to access your contacts under Privacy in Settings. ", error.localizedDescription];
+                            [self showAlertWithMessage:message];
+                        });
+                    }
+                }
+            }];
+        }
+        break;
+        default:
+            completionHandler(NO);
+            break;
     }
 }
 
